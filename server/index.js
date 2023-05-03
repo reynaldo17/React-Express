@@ -4,8 +4,12 @@ const PORT = process.env.PORT || 8000;
 
 const app = express();
 
+const path = require('path')
+
+app.use(express.static(path.resolve(__dirname, '../favlinks/build')))
+
 app.get('/', (req, res) => {
-    res.send('Im sending something yo!')
+    res.sendFile(path.resolve(__dirname, '../favlinks/build', 'index.html'))
 })
 
 app.get('/api', (req, res) => {

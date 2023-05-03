@@ -3,14 +3,13 @@ import LinkContainer from './components/LinkContainer'
 
 function App() {
   useEffect(() => {
-    fetch('http://localhost:8000/api')
-    .then((res) => {
-        console.log(res)
-    })
+    fetch('/api')
+    .then((res) => res.json())
+    .then((data) => console.log(data))
     .catch((err) => {
         console.log(err)
     })
-  })
+  }, [])
 
   return (
     <div className="App">

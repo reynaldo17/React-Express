@@ -29,7 +29,7 @@ const getLinks = (req, res) => {
 const getLinkByID = (request, response) => {
   const id = parseInt(request.params.id)
 
-  pool.query('SELECT * FROM users WHERE id = $1', [id], (error, results) => {
+  pool.query('SELECT * FROM links WHERE id = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
@@ -42,7 +42,7 @@ const getLinkByID = (request, response) => {
 const createNewLink = (request, response) => {
   const { name, URL } = request.body
 
-  pool.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *', [name, URL], (error, results) => {
+  pool.query('INSERT INTO links (name, url) VALUES ($1, $2) RETURNING *', [name, URL], (error, results) => {
     if (error) {
       throw error
     }
@@ -59,11 +59,11 @@ const createNewLink = (request, response) => {
 const deleteLink = (request, response) => {
   const id = parseInt(request.params.id)
 
-  pool.query('DELETE FROM users WHERE id = $1', [id], (error, results) => {
+  pool.query('DELETE FROM links WHERE id = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
-    response.status(200).send(`User deleted with ID: ${id}`)
+    response.status(200).send(`Link deleted with ID: ${id}`)
   })
 }
 
